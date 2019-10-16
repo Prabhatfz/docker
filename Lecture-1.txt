@@ -1,0 +1,28 @@
+SomeUseful links:
+Selenium Tutorials:
+https://www.youtube.com/playlist?list=PLhW3qG5bs-L_s9HdC5zNshE5Ti8jABwlU
+
+https://stackoverflow.com/questions/36885985/cannot-start-docker-after-installation-on-windows
+
+https://jayvilalta.com/blog/2016/04/28/installing-docker-toolbox-on-windows-with-hyper-v-installed/
+
+https://superuser.com/questions/540055/convenient-way-to-enable-disable-hyper-v-in-windows-8
+
+https://docs.docker.com/machine/drivers/hyper-v/
+
+##Operating Containers
+
+docker container run --rm mongo #--rm, remove the container automa.. after the process is stopped.
+
+docker container run -d --name mongo mongo #-d, argument, means detached, then give it a name(mongo), then name of the image
+
+docker container stop CONTAINER ID
+
+docker container ls
+docker container ls -a #It will show all the containers included stoped and deleted.
+
+docker container logs mongo
+
+docker container rm mongo
+
+docker container run -d --name mongo -p 8081:27017 mongo #-p, publish. 8081 is mapped to the process inside the container 27017. Name of the immage.
