@@ -26,3 +26,40 @@ docker container logs mongo
 docker container rm mongo
 
 docker container run -d --name mongo -p 8081:27017 mongo #-p, publish. 8081 is mapped to the process inside the container 27017. Name of the immage.
+docker container run -d --name mongo -p 27017 mongo #Here we are publishing the internal port 27017, and let the docker decide what will be the publish port. 
+
+docker container run -d --name mongo -p 27017 -v /temp/mongo:/data/db mongo #-v, volume. Two volume seperated with "/". 
+First path is where do we want to mount the volume, here it is local drive.
+Second should be mounted inside the container. Mongo store the state here by default.
+
+What are state less and state full process?
+
+docker container inspect mongo
+
+##Using Docker Compose:
+https://docs.docker.com/compose/compose-file/
+https://docs.docker.com/get-started/
+https://docs.docker.com/get-started/part3/#your-first-docker-composeyml-file
+
+git clone https://github.com/vfarcic/go-demo.git
+docker-compose up -d
+--------------------------------------------
+##docker-compose.yml file
+version: '2'
+
+services:
+
+  app:
+    image: vfarcic/go-demo
+    ports:
+      - 8080
+
+  db:
+    image: mongo:3.2.10
+------------------------------------------
+docker-compose up -d
+docker-compose ps
+docker container inspect go-demo_app_1 | jq '.'
+PORT=$(docker container inspect go-demo_app_1 | jq -r '.[0].NetworkSettings.Ports."8080/tcp"[0].HostPort')
+localhost:$PORT/demo/hello
+docker-compose down
